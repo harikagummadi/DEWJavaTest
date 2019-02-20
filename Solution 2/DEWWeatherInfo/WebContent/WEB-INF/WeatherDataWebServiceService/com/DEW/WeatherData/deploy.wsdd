@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WeatherDataWebServiceService WSDL service -->
+
+  <service name="WeatherDataWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://WeatherData.DEW.com"/>
+      <parameter name="wsdlServiceElement" value="WeatherDataWebServiceService"/>
+      <parameter name="schemaQualified" value="http://WeatherData.DEW.com"/>
+      <parameter name="wsdlServicePort" value="WeatherDataWebService"/>
+      <parameter name="className" value="com.DEW.WeatherData.WeatherDataWebService"/>
+      <parameter name="wsdlPortType" value="WeatherDataWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://WeatherData.DEW.com" xmlns:retNS="http://WeatherData.DEW.com" xmlns:rtns="http://WeatherData.DEW.com" name="populateWeatherBean" qname="operNS:populateWeatherBean" returnQName="retNS:populateWeatherBeanReturn" returnType="rtns:WeatherDataBean" soapAction="">
+        <parameter xmlns:pns="http://WeatherData.DEW.com" xmlns:tns="http://WeatherData.DEW.com" qname="pns:bean" type="tns:WeatherDataBean"/>
+        <parameter xmlns:pns="http://WeatherData.DEW.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:object" type="tns:anyType"/>
+      </operation>
+      <operation xmlns:operNS="http://WeatherData.DEW.com" xmlns:retNS="http://WeatherData.DEW.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getWeatherDataService" qname="operNS:getWeatherDataService" returnQName="retNS:getWeatherDataServiceReturn" returnType="rtns:anyType" soapAction="">
+        <parameter xmlns:pns="http://WeatherData.DEW.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:station" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="getWeatherDataService populateWeatherBean"/>
+
+      <typeMapping xmlns:ns="http://WeatherData.DEW.com" qname="ns:&gt;populateWeatherBeanResponse" type="java:com.DEW.WeatherData.PopulateWeatherBeanResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://WeatherData.DEW.com" qname="ns:WeatherDataBean" type="java:com.DEW.WeatherData.WeatherDataBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://WeatherData.DEW.com" qname="ns:&gt;getWeatherDataService" type="java:com.DEW.WeatherData.GetWeatherDataService" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://WeatherData.DEW.com" qname="ns:&gt;getWeatherDataServiceResponse" type="java:com.DEW.WeatherData.GetWeatherDataServiceResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

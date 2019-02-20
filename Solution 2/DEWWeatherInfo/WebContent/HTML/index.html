@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+        	   $('#station').on('change', function() {
+        	     $('#submit').click();
+        	   });
+        	});
+
+        </script>
+    </head>
+    <body>
+        <h4>Please select any Weather Observation Station </h4>
+        <form action="./WeatherData.jsp" method="post">
+            <select name="station_id" id="station">
+                <option value="94672">Adelaide Airport</option>
+                <option value="95676">Edinburgh</option>
+                <option value="94677">Hindmarsh Island</option>
+                <option value="94683">Kuitpo</option>
+            </select> 
+            <br>
+            <br>
+            <input type="submit" id="submit" name="submit" value="Submit">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://WeatherData.DEW.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://WeatherData.DEW.com" xmlns:intf="http://WeatherData.DEW.com" xmlns:tns1="http://simple.json.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://WeatherData.DEW.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://simple.json.org"/>
+   <element name="getWeatherDataService">
+    <complexType>
+     <sequence>
+      <element name="station" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWeatherDataServiceResponse">
+    <complexType>
+     <sequence>
+      <element name="getWeatherDataServiceReturn" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_anyType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+   <element name="populateDataBean">
+    <complexType>
+     <sequence>
+      <element name="dataJsonObject" type="xsd:anyType"/>
+      <element name="wd" type="impl:WeatherDataBean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WeatherDataBean">
+    <sequence>
+     <element name="aifstime_utc" nillable="true" type="xsd:string"/>
+     <element name="air_temp" type="xsd:double"/>
+     <element name="apparent_t" type="xsd:double"/>
+     <element name="cloud" nillable="true" type="xsd:string"/>
+     <element name="cloudBase_m" nillable="true" type="xsd:string"/>
+     <element name="cloud_oktas" type="xsd:int"/>
+     <element name="cloud_type" nillable="true" type="xsd:string"/>
+     <element name="cloud_type_id" type="xsd:int"/>
+     <element name="delta_t" type="xsd:double"/>
+     <element name="dewpt" type="xsd:double"/>
+     <element name="gust_kmh" type="xsd:int"/>
+     <element name="gust_kt" type="xsd:int"/>
+     <element name="history_product" nillable="true" type="xsd:string"/>
+     <element name="lat" type="xsd:double"/>
+     <element name="local_date_time" nillable="true" type="xsd:string"/>
+     <element name="local_date_time_full" nillable="true" type="xsd:string"/>
+     <element name="lon" type="xsd:double"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="press" type="xsd:double"/>
+     <element name="press_msl" type="xsd:double"/>
+     <element name="press_qnh" type="xsd:double"/>
+     <element name="press_tend" nillable="true" type="xsd:string"/>
+     <element name="rain_trace" nillable="true" type="xsd:string"/>
+     <element name="rel_hum" type="xsd:int"/>
+     <element name="sea_state" nillable="true" type="xsd:string"/>
+     <element name="sort_order" type="xsd:int"/>
+     <element name="swell_dir_worded" nillable="true" type="xsd:string"/>
+     <element name="swell_height" nillable="true" type="xsd:string"/>
+     <element name="swell_period" nillable="true" type="xsd:string"/>
+     <element name="vis_km" nillable="true" type="xsd:string"/>
+     <element name="weather" nillable="true" type="xsd:string"/>
+     <element name="wind_dir" nillable="true" type="xsd:string"/>
+     <element name="wind_spd_kmh" type="xsd:int"/>
+     <element name="wind_spd_kt" type="xsd:int"/>
+     <element name="wmo" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="populateDataBeanResponse">
+    <complexType>
+     <sequence>
+      <element name="populateDataBeanReturn" type="impl:WeatherDataBean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="populateDataBeanRequest">
+
+      <wsdl:part element="impl:populateDataBean" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="populateDataBeanResponse">
+
+      <wsdl:part element="impl:populateDataBeanResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWeatherDataServiceRequest">
+
+      <wsdl:part element="impl:getWeatherDataService" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWeatherDataServiceResponse">
+
+      <wsdl:part element="impl:getWeatherDataServiceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WeatherDataService">
+
+      <wsdl:operation name="getWeatherDataService">
+
+         <wsdl:input message="impl:getWeatherDataServiceRequest" name="getWeatherDataServiceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getWeatherDataServiceResponse" name="getWeatherDataServiceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="populateDataBean">
+
+         <wsdl:input message="impl:populateDataBeanRequest" name="populateDataBeanRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:populateDataBeanResponse" name="populateDataBeanResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WeatherDataServiceSoapBinding" type="impl:WeatherDataService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getWeatherDataService">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getWeatherDataServiceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getWeatherDataServiceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="populateDataBean">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="populateDataBeanRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="populateDataBeanResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WeatherDataServiceService">
+
+      <wsdl:port binding="impl:WeatherDataServiceSoapBinding" name="WeatherDataService">
+
+         <wsdlsoap:address location="http://localhost:8080/DEWWeatherInfo/services/WeatherDataService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
